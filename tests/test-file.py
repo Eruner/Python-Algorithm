@@ -12,3 +12,11 @@ def createTestFile():
 	csvfiles.writeCsv(fileName, header, items)
 
 createTestFile()
+
+def readTestFile():
+	fileName = '..\output\DeleteMePlease.txt'
+	content = csvfiles.loadCsv(fileName)
+	print('loaded:')
+	print(content)
+
+readTestFile()
