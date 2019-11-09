@@ -1,4 +1,5 @@
 import csvfiles
+import prepare
 
 def complexAlgorithm():
     print('started complex algorithm')
@@ -7,16 +8,17 @@ def complexAlgorithm():
     print('there are ' +str(numberOfItems)+ ' items')
     numberOfClusters = 3
     numberOfAttributes = 4
-    centers = initCenters(numberOfAttributes, numberOfClusters)
-    likeliness = initLikeliness(numberOfClusters, numberOfItems)
+    centers = prepare.Centers(numberOfAttributes, numberOfClusters)
+    likeliness = prepare.Likeliness(numberOfClusters, numberOfItems)
     print('likeliness ' + str(likeliness))
-    weights = initWeights(numberOfAttributes, numberOfClusters, numberOfItems)
+    weights = prepare.Weights(numberOfAttributes, numberOfClusters, numberOfItems)
     print('weights ' + str(weights))
-    clusterWeights = initClusterWeights(numberOfClusters)
+    clusterWeights = prepare.ClusterWeights(numberOfClusters)
     print('clusterWeights ' + str(clusterWeights))
     # secundary parameters = Tmax, Pmax, Pinit, E
     # no idea what they are and what values they should be
     iterations = 0
+    maxIterations = 3
     Pinit = 0
     P = 0
     isEmpty = False
@@ -26,20 +28,6 @@ def complexAlgorithm():
 def loadDataSet():
     fileName = '..\data\iris.data'
     return csvfiles.loadCsv(fileName)
-
-def initCenters(numberOfAttributes, numberOfClusters):
-    return [ [0]*numberOfAttributes ] * numberOfClusters
-
-def initLikeliness(numberOfClusters, numberOfItems):
-    return [ [0]*numberOfClusters ] * numberOfItems
-
-def initWeights(numberOfAttributes, numberOfClusters, numberOfItems):
-    initialItemWeight = 1 / numberOfAttributes
-    return [ [initialItemWeight]*numberOfClusters ] * numberOfItems
-
-def initClusterWeights(numberOfClusters):
-    initialClusterWeight = 1 / numberOfClusters
-    return [initialClusterWeight] * numberOfClusters
 
 def complexLoop():
     print('complex loop')
