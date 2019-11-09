@@ -1,5 +1,6 @@
 import csvfiles
 import prepare
+import output
 
 def complexAlgorithm():
     print('started complex algorithm')
@@ -15,14 +16,8 @@ def complexAlgorithm():
     print('weights ' + str(weights))
     clusterWeights = prepare.ClusterWeights(numberOfClusters)
     print('clusterWeights ' + str(clusterWeights))
-    # secundary parameters = Tmax, Pmax, Pinit, E
-    # no idea what they are and what values they should be
-    iterations = 0
-    maxIterations = 3
-    Pinit = 0
-    P = 0
-    isEmpty = False
     complexLoop()
+    output.Results(centers, likeliness)
     print('ended complex algorithm')
 
 def loadDataSet():
@@ -31,6 +26,12 @@ def loadDataSet():
 
 def complexLoop():
     print('complex loop')
+    # secundary parameters = Tmax, Pmax, Pinit, E
+    # no idea what they are and what values they should be    Pinit = 0
+    iterations = 0
+    maxIterations = 3
+    P = 0
+    isEmpty = False
     # start loop
     compute()
     # end loop

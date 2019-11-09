@@ -1,4 +1,0 @@
-Name,number
-car,4
-animal,7
-human,47
