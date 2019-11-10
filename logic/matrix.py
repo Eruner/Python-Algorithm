@@ -63,9 +63,19 @@ def sumCenterWithItem(clusterIndex, attributeIndex):
         itemValue = globals.dataset[itemIndex][attributeIndex]
         centerValue = globals.centers[clusterIndex][attributeIndex]
         centerDistance = distance(itemValue, centerValue)
+        likehood = pow(likeValue,globals.fuzzyCoeficien)
+        sum = sum + ( likehood * centerDistance * itemValue )
     return 1
 
 def sumCenter():
+    sum = 0
+    for itemIndex in range(globals.numberOfItems):
+        likeValue = globals.likeliness[itemIndex][clusterIndex]
+        itemValue = globals.dataset[itemIndex][attributeIndex]
+        centerValue = globals.centers[clusterIndex][attributeIndex]
+        centerDistance = distance(itemValue, centerValue)
+        likehood = pow(likeValue,globals.fuzzyCoeficien)
+        sum = sum + ( likehood * centerDistance )
     return 1
 
 def updateWeights(weights):
