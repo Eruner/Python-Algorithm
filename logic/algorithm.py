@@ -1,45 +1,27 @@
+import globals
 import csvfiles
 import prepare
 import output
 import matrix
 
-# global variables
-fuzzyCoeficien = 2 # α > 1
-numberOfItems = 0
-numberOfClusters = 3
-numberOfAttributes = 4
-
-# global data structures
-dataset = None
-centers = None
-likeliness = None
-weights = None
-clusterWeights = None
 
 def complexAlgorithm():
     print('started complex algorithm')
     initializeGlobals()
     complexLoop()
-    output.Results(centers, likeliness)
+    output.Results()
     print('ended complex algorithm')
 
 def initializeGlobals():
-    # this way we modify global variables
-    global dataset
-    dataset = loadDataSet()
-    global numberOfItems
-    numberOfItems = len(dataset)
-    global centers
-    centers = prepare.Centers(numberOfAttributes, numberOfClusters)
-    global likeliness
-    likeliness = prepare.Likeliness(numberOfClusters, numberOfItems)
-    global weights
-    weights = prepare.Weights(numberOfAttributes, numberOfClusters, numberOfItems)
-    global clusterWeights
-    clusterWeights = prepare.ClusterWeights(numberOfClusters)
-    print('likeliness ' + str(likeliness))
-    print('weights ' + str(weights))
-    print('clusterWeights ' + str(clusterWeights))
+    globals.dataset = loadDataSet()
+    globals.numberOfItems = len(globals.dataset)
+    globals.centers = prepare.Centers(globals.numberOfAttributes, globals.numberOfClusters)
+    globals.likeliness = prepare.Likeliness(globals.numberOfClusters, globals.numberOfItems)
+    globals.weights = prepare.Weights(globals.numberOfAttributes, globals.numberOfClusters, globals.numberOfItems)
+    globals.clusterWeights = prepare.ClusterWeights(globals.numberOfClusters)
+    print('likeliness ' + str(globals.likeliness))
+    print('weights ' + str(globals.weights))
+    print('clusterWeights ' + str(globals.clusterWeights))
 
 def loadDataSet():
     fileName = '..\data\iris.data'
@@ -76,23 +58,19 @@ def shouldContinue():
     return True
 
 def updateLikeliness():
-    global likeliness
-    likeliness = matrix.updateLikeliness(likeliness, numberOfItems, numberOfClusters, clusterWeights, numberOfAttributes, weights)
+    globals.likeliness = matrix.updateLikeliness(globals.numberOfItems, globals.numberOfClusters)
 
 def updateCenters():
-    global centers
-    # centers = 
-    matrix.updateCenters(centers)
+    # globals.centers = 
+    matrix.updateCenters(globals.centers)
 
 def updateWeights():
-    global weights
-    # weights = 
-    matrix.updateWeights(weights)
+    # globals.weights = 
+    matrix.updateWeights(globals.weights)
 
 def updateClusterWeights():
-    global clusterWeights
-    # clusterWeights = 
-    matrix.updateClusterWeights(clusterWeights)
+    # globals.clusterWeights = 
+    matrix.updateClusterWeights(globals.clusterWeights)
 
 
 # for later

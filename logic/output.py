@@ -1,10 +1,11 @@
 import csvfiles
 import datetime
+import globals
 
-def Results(centers, likeliness):
+def Results():
 	header = ['Iris Setosa', 'Iris Versicolor', 'Iris Virginica']
-	printFile('centers', header, centers)
-	printFile('likeliness', header, likeliness)
+	printFile('centers', header, globals.centers)
+	printFile('likeliness', header, globals.likeliness)
 
 def printFile(label, header, items):
 	fileName = timeStamped(label + '.csv')

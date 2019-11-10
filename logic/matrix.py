@@ -1,23 +1,23 @@
+import globals
 
-
-def updateLikeliness(likeliness, rows, cols, clusterWeights, numberOfAttributes, weights):
+def updateLikeliness(rows, cols):
     print(str(rows)+' x '+str(cols))
     newLikeliness = [ [0] * cols ] * rows
     for row in range(rows):
         for col in range(cols):
             #print('['+str(row)+','+str(col)+']')
-            newLikeliness[row][col] = calculateOneLikeliness(cols, clusterWeights, col, numberOfAttributes, weights)
+            newLikeliness[row][col] = calculateOneLikeliness(cols, col)
     print('updating lineliness')
     return newLikeliness
 
-def calculateOneLikeliness(cols, clusterWeights, ourIndex, numberOfAttributes, weights):
+def calculateOneLikeliness(cols, ourIndex):
     sum = 0
-    ourClusterWeight = clusterWeights[ourIndex]
+    ourClusterWeight = globals.clusterWeights[ourIndex]
     for line in range(cols):
-        lineClusterWeight = clusterWeights[line]
+        lineClusterWeight = globals.clusterWeights[line]
         clusterWeightCoeficien = ourClusterWeight / lineClusterWeight
-        k = likeStuff(numberOfAttributes, weights, ourIndex)
-        l = likeStuff(numberOfAttributes, weights, line)
+        k = likeStuff(ourIndex)
+        l = likeStuff(line)
         
         #for attributeIndex in range(numberOfClusters):
             # calculate top sum
@@ -25,7 +25,9 @@ def calculateOneLikeliness(cols, clusterWeights, ourIndex, numberOfAttributes, w
         # divide and sum
     return 0
 
-def likeStuff(numberOfAttributes, weights, index):
+def likeStuff(index):
+    #globals.numberOfAttributes
+    #globals.weights
     return 1
 
 def updateCenters(centers):
