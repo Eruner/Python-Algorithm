@@ -61,8 +61,7 @@ def updateLikeliness():
     globals.likeliness = matrix.updateLikeliness()
 
 def updateCenters():
-    # globals.centers = 
-    matrix.updateCenters(globals.centers)
+    globals.centers = matrix.updateCenters(globals.centers)
 
 def updateWeights():
     # globals.weights = 

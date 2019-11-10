@@ -49,7 +49,8 @@ def updateCenters(centers):
         for attributeIndex in range(globals.numberOfAttributes):
             centerAttribute = calculateOneCenterAttribute(clusterIndex, attributeIndex)
             newCenters[clusterIndex][attributeIndex] = centerAttribute
-    print('updating centers')
+    #print('updating centers')
+    return newCenters
 
 def calculateOneCenterAttribute(clusterIndex, attributeIndex):
     sum1 = sumCenterWithItem(clusterIndex, attributeIndex)
