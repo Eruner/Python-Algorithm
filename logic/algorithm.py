@@ -1,6 +1,10 @@
 import csvfiles
 import prepare
 import output
+import matrix
+
+fuzzyCoeficien = 2 # α > 1
+
 
 def complexAlgorithm():
     print('started complex algorithm')
@@ -25,19 +29,34 @@ def loadDataSet():
     return csvfiles.loadCsv(fileName)
 
 def complexLoop():
-    print('complex loop')
+    print('complex loop:')
     # secundary parameters = Tmax, Pmax, Pinit, E
     # no idea what they are and what values they should be    Pinit = 0
-    iterations = 0
-    maxIterations = 3
+    iterations = 0 # T
+    maxIterations = 3 # Tmax
     P = 0
     isEmpty = False
     # start loop
-    compute()
+    while shouldContinue() and iterations < maxIterations:
+        iterations = iterations + 1
+        compute()
+    print('loop ended')
     # end loop
 
 def compute():
-    print('computing')
+    print('computing:')
+    matrix.updateLikeliness()
+    # if singletons -> do magic
+    matrix.updateCenters()
+    # if p < pmax AND empty=False -> do history
+    matrix.updateWeights()
+    matrix.updateClusterWeights()
+
+def shouldContinue():
+    # difference = ABSolute value of F(t) - F(t-1)
+    # is less then epsilon e
+    # no idea how to implement
+    return True
 
 def distance(a,b):
     return 1 - exp(- pow(dispersion(a - b),2))
