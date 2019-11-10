@@ -4,7 +4,7 @@ def loadCsv(fileName):
 	print('loading file ' + fileName)
 	print(fileName)
 	raw_data = open(fileName, 'rt')
-	reader = csv.DictReader(raw_data, delimiter=',', quoting=csv.QUOTE_NONE)
+	reader = csv.reader(raw_data, delimiter=',', quoting=csv.QUOTE_NONE)
 	items = list(reader)
 	raw_data.close()
 	return items

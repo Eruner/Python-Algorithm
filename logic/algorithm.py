@@ -58,7 +58,7 @@ def shouldContinue():
     return True
 
 def updateLikeliness():
-    globals.likeliness = matrix.updateLikeliness(globals.numberOfItems, globals.numberOfClusters)
+    globals.likeliness = matrix.updateLikeliness()
 
 def updateCenters():
     # globals.centers = 
@@ -71,15 +71,6 @@ def updateWeights():
 def updateClusterWeights():
     # globals.clusterWeights = 
     matrix.updateClusterWeights(globals.clusterWeights)
-
-
-# for later
-def distance(a,b):
-    return 1 - exp(- pow(dispersion(a - b),2))
-
-def dispersion(a,b):
-    #what is I in 7th page? Ym = I / var(m) ???
-    return 1
 
 # run the algorithm
 complexAlgorithm()
