@@ -1,13 +1,13 @@
 
 
-def updateLikeliness():
+def updateLikeliness(likeliness):
     print('updating lineliness')
 
-def updateCenters():
+def updateCenters(centers):
     print('updating centers')
 
-def updateWeights():
+def updateWeights(weights):
     print('updating weights')
 
-def updateClusterWeights():
+def updateClusterWeights(clusterWeights):
     print('updating cluster weights')

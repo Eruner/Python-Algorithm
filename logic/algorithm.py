@@ -3,26 +3,43 @@ import prepare
 import output
 import matrix
 
+# global variables
 fuzzyCoeficien = 2 # α > 1
+numberOfItems = 0
+numberOfClusters = 3
+numberOfAttributes = 4
 
+# global data structures
+dataset = None
+centers = None
+likeliness = None
+weights = None
+clusterWeights = None
 
 def complexAlgorithm():
     print('started complex algorithm')
-    dataset = loadDataSet()
-    numberOfItems = len(dataset)
-    print('there are ' +str(numberOfItems)+ ' items')
-    numberOfClusters = 3
-    numberOfAttributes = 4
-    centers = prepare.Centers(numberOfAttributes, numberOfClusters)
-    likeliness = prepare.Likeliness(numberOfClusters, numberOfItems)
-    print('likeliness ' + str(likeliness))
-    weights = prepare.Weights(numberOfAttributes, numberOfClusters, numberOfItems)
-    print('weights ' + str(weights))
-    clusterWeights = prepare.ClusterWeights(numberOfClusters)
-    print('clusterWeights ' + str(clusterWeights))
+    initializeGlobals()
     complexLoop()
     output.Results(centers, likeliness)
     print('ended complex algorithm')
+
+def initializeGlobals():
+    # this way we modify global variables
+    global dataset
+    dataset = loadDataSet()
+    global numberOfItems
+    numberOfItems = len(dataset)
+    global centers
+    centers = prepare.Centers(numberOfAttributes, numberOfClusters)
+    global likeliness
+    likeliness = prepare.Likeliness(numberOfClusters, numberOfItems)
+    global weights
+    weights = prepare.Weights(numberOfAttributes, numberOfClusters, numberOfItems)
+    global clusterWeights
+    clusterWeights = prepare.ClusterWeights(numberOfClusters)
+    print('likeliness ' + str(likeliness))
+    print('weights ' + str(weights))
+    print('clusterWeights ' + str(clusterWeights))
 
 def loadDataSet():
     fileName = '..\data\iris.data'
@@ -45,19 +62,41 @@ def complexLoop():
 
 def compute():
     print('computing:')
-    matrix.updateLikeliness()
+    updateLikeliness()
     # if singletons -> do magic
-    matrix.updateCenters()
+    updateCenters()
     # if p < pmax AND empty=False -> do history
-    matrix.updateWeights()
-    matrix.updateClusterWeights()
+    updateWeights()
+    updateClusterWeights()
 
 def shouldContinue():
     # difference = ABSolute value of F(t) - F(t-1)
     # is less then epsilon e
-    # no idea how to implement
+    # no idea how to implement it
     return True
 
+def updateLikeliness():
+    global likeliness
+    # likeliness = 
+    matrix.updateLikeliness(likeliness)
+
+def updateCenters():
+    global centers
+    # centers = 
+    matrix.updateCenters(centers)
+
+def updateWeights():
+    global weights
+    # weights = 
+    matrix.updateWeights(weights)
+
+def updateClusterWeights():
+    global clusterWeights
+    # clusterWeights = 
+    matrix.updateClusterWeights(clusterWeights)
+
+
+# for later
 def distance(a,b):
     return 1 - exp(- pow(dispersion(a - b),2))
 
@@ -65,4 +104,5 @@ def dispersion(a,b):
     #what is I in 7th page? Ym = I / var(m) ???
     return 1
 
+# run the algorithm
 complexAlgorithm()
