@@ -1,4 +1,5 @@
 import globals
+import prepare
 
 def updateLikeliness():
     newLikeliness = [ [0] * globals.numberOfClusters ] * globals.numberOfItems
@@ -6,7 +7,7 @@ def updateLikeliness():
         for clusterNumber in range(globals.numberOfClusters):
             oneLike = calculateOneLikeliness(clusterNumber, itemNumber)
             newLikeliness[itemNumber][clusterNumber] = oneLike
-    print('updating lineliness')
+    #print('updating lineliness')
     return newLikeliness
 
 def calculateOneLikeliness(clusterNumber, itemIndex):
@@ -23,7 +24,7 @@ def calculateOneLikeliness(clusterNumber, itemIndex):
         power = 1 / (globals.fuzzyCoeficien - 1)
         powered = pow(division, power)
         sum = sum + powered
-    print(sum)
+    #print(sum)
     return 1 / sum
 
 def likeStuff(index, itemIndex):
@@ -43,7 +44,29 @@ def likeStuff(index, itemIndex):
     return sum
 
 def updateCenters(centers):
+    newCenters = prepare.Centers(globals.numberOfAttributes, globals.numberOfClusters)
+    for clusterIndex in range(globals.numberOfClusters):
+        for attributeIndex in range(globals.numberOfAttributes):
+            centerAttribute = calculateOneCenterAttribute(clusterIndex, attributeIndex)
+            newCenters[clusterIndex][attributeIndex] = centerAttribute
     print('updating centers')
+
+def calculateOneCenterAttribute(clusterIndex, attributeIndex):
+    sum1 = sumCenterWithItem(clusterIndex, attributeIndex)
+    sum2 = sumCenter()
+    return sum1 / sum2
+
+def sumCenterWithItem(clusterIndex, attributeIndex):
+    sum = 0
+    for itemIndex in range(globals.numberOfItems):
+        likeValue = globals.likeliness[itemIndex][clusterIndex]
+        itemValue = globals.dataset[itemIndex][attributeIndex]
+        centerValue = globals.centers[clusterIndex][attributeIndex]
+        centerDistance = distance(itemValue, centerValue)
+    return 1
+
+def sumCenter():
+    return 1
 
 def updateWeights(weights):
     print('updating weights')
