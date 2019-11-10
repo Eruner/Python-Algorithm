@@ -50,7 +50,7 @@ def complexLoop():
     # secundary parameters = Tmax, Pmax, Pinit, E
     # no idea what they are and what values they should be    Pinit = 0
     iterations = 0 # T
-    maxIterations = 3 # Tmax
+    maxIterations = 2 # Tmax
     P = 0
     isEmpty = False
     # start loop
@@ -77,8 +77,7 @@ def shouldContinue():
 
 def updateLikeliness():
     global likeliness
-    # likeliness = 
-    matrix.updateLikeliness(likeliness)
+    likeliness = matrix.updateLikeliness(likeliness, numberOfItems, numberOfClusters, clusterWeights, numberOfAttributes, weights)
 
 def updateCenters():
     global centers
