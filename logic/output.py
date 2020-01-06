@@ -5,7 +5,7 @@ import globals
 def Results():
 	header = ['Iris Setosa', 'Iris Versicolor', 'Iris Virginica']
 	printFile('centers', header, globals.centers)
-	printFile('likeliness', header, globals.likeliness)
+	printFile('membershipDegree', header, globals.likeliness)
 
 def printFile(label, header, items):
 	fileName = timeStamped(label + '.csv')

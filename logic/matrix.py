@@ -1,5 +1,6 @@
 import globals
 import prepare
+import scipy.spatial
 
 def updateLikeliness():
     #print('updating lineliness')
@@ -21,7 +22,7 @@ def calculateOneLikeliness(clusterNumber, itemIndex):
         l = likeStuff(line, itemIndex)
         #print('k = '+str(k)+', l = '+str(l))
         division = clusterWeightCoeficien * k / l
-        power = 1 / (globals.fuzzyCoeficien - 1)
+        power = 1 / (globals.fuzziness - 1)
         powered = pow(division, power)
         sum = sum + powered
     #print(sum)
@@ -72,7 +73,7 @@ def sumCenterWithItem(clusterIndex, attributeIndex):
         itemValue = float(itemValue)
         centerValue = globals.centers[clusterIndex][attributeIndex]
         centerDistance = distance(itemValue, centerValue)
-        likehood = pow(likeValue,globals.fuzzyCoeficien)
+        likehood = pow(likeValue,globals.fuzziness)
         sum = sum + ( likehood * centerDistance * itemValue )
     return 1
 
@@ -84,7 +85,7 @@ def sumCenter(clusterIndex, attributeIndex):
         itemValue = float(itemValue)
         centerValue = globals.centers[clusterIndex][attributeIndex]
         centerDistance = distance(itemValue, centerValue)
-        likehood = pow(likeValue,globals.fuzzyCoeficien)
+        likehood = pow(likeValue,globals.fuzziness)
         sum = sum + ( likehood * centerDistance )
     return 1
 
@@ -105,7 +106,7 @@ def calculateOneWeight(clusterIndex, attributeIndex):
         itemValue = float(itemValue)
         centerValue = globals.centers[clusterIndex][attributeIndex]
         centerDistance = distance(itemValue, centerValue)
-        u = pow(likeValue, globals.fuzzyCoeficien)
+        u = pow(likeValue, globals.fuzziness)
         d = pow(centerDistance,2)
         toAdd = u * d
         DifferenceOfCluster = DifferenceOfCluster + toAdd
@@ -129,7 +130,7 @@ def calculateOneClusterWeight(clusterIndex):
             centerValue = globals.centers[clusterIndex][attributeIndex]
             centerDistance = distance(itemValue, centerValue)
             q = 1 # no idea what should be q, maybe manually set
-            u = pow(likeValue, globals.fuzzyCoeficien)
+            u = pow(likeValue, globals.fuzziness)
             w = pow(weightValue, q)
             d = pow(centerDistance,2)
             toAdd = u * w * d
@@ -140,7 +141,7 @@ def calculateOneClusterWeight(clusterIndex):
 def distance(a,b):
     # TODO = understand
     # return 1 - exp(- pow(dispersion(a - b),2))
-    return 1
+    return  scipy.spatial.distance.euclidean(float(a),float(b))
 
 def dispersion(a,b):
     # TODO = understand

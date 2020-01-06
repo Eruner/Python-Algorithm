@@ -1,13 +1,16 @@
 
 # global variables
-fuzzyCoeficien = 2 # α > 1
-numberOfItems = 0
-numberOfClusters = 3
-numberOfAttributes = 4
+fuzziness = 2                   # α > 1
+numberOfItems = 0               #   N
+numberOfClusters = 3            #   K
+numberOfAttributes = 4          #   M
+objectiveFunction = None        #   F
 
 # global data structures
-dataset = None
-centers = None
-likeliness = None
-weights = None
-clusterWeights = None
+dataset = None                  #   N x M
+centers = None                  #   K x M
+membershipDegree = None         #   N x K    MEMBERSHIP DEGREES
+weights = None                  #   K x M    w = vahy atributov
+clusterWeights = None           #   1 x K    z = vahy zhlukov
+
+

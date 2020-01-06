@@ -19,7 +19,7 @@ def initializeGlobals():
     globals.likeliness = prepare.Likeliness(globals.numberOfClusters, globals.numberOfItems)
     globals.weights = prepare.Weights(globals.numberOfAttributes, globals.numberOfClusters, globals.numberOfItems)
     globals.clusterWeights = prepare.ClusterWeights(globals.numberOfClusters)
-    print('likeliness ' + str(globals.likeliness))
+    print('membershipDegree ' + str(globals.likeliness))
     print('weights ' + str(globals.weights))
     print('clusterWeights ' + str(globals.clusterWeights))
 
