@@ -2,33 +2,33 @@ import globals
 import prepare
 import scipy.spatial
 
-def updateLikeliness():
+def updateMembershipDegree():
     #print('updating lineliness')
     newLikeliness = [ [0] * globals.numberOfClusters ] * globals.numberOfItems
     for itemNumber in range(globals.numberOfItems):
         for clusterNumber in range(globals.numberOfClusters):
-            oneLike = calculateOneLikeliness(clusterNumber, itemNumber)
+            oneLike = calculateOneMembershipDegree(clusterNumber, itemNumber)
             newLikeliness[itemNumber][clusterNumber] = oneLike
     return newLikeliness
 
-def calculateOneLikeliness(clusterNumber, itemIndex):
+def calculateOneMembershipDegree(clusterNumber, itemIndex):
     # 9) U(n,k) = 1 / SUM[..k.. / ..l..]^(1/α-1)
     sum = 0
     ourClusterWeight = globals.clusterWeights[clusterNumber]
     for line in range(globals.numberOfClusters):
         lineClusterWeight = globals.clusterWeights[line]
         clusterWeightCoeficien = ourClusterWeight / lineClusterWeight
-        k = likeStuff(clusterNumber, itemIndex)
-        l = likeStuff(line, itemIndex)
+        k = calculateMembershipDegree(clusterNumber, itemIndex)
+        l = calculateMembershipDegree(line, itemIndex)
         #print('k = '+str(k)+', l = '+str(l))
         division = clusterWeightCoeficien * k / l
         power = 1 / (globals.fuzziness - 1)
         powered = pow(division, power)
         sum = sum + powered
-    #print(sum)
+    print(sum)
     return 1 / sum
 
-def likeStuff(index, itemIndex):
+def calculateMembershipDegree(index, itemIndex):
     # k = which cluster/center = index
     # m = which attribute = attributeIndex
     # n = which item = itemIndex
@@ -118,6 +118,7 @@ def updateClusterWeights(clusterWeights):
     for clusterIndex in range(globals.numberOfClusters):
         newClusterWeight = calculateOneClusterWeight(clusterIndex)
         globals.clusterWeights[clusterIndex] = newClusterWeight
+        print(newClusterWeight)
 
 def calculateOneClusterWeight(clusterIndex):
     clusterWeight = 0
@@ -147,3 +148,9 @@ def dispersion(a,b):
     # TODO = understand
     # what is I in 7th page? Ym = I / var(m) ???
     return 1
+
+def updateObjectiveFunction() :
+    # all numbers of items / elements
+    # all clusters K
+    # all attributes M
+    globals.objectiveFunction

@@ -42,14 +42,26 @@ def complexLoop():
     print('loop ended')
     # end loop
 
+
+def computeObjectiveFunction():
+    globals.objectiveFunctionBefore = globals.objectiveFunction
+    # u_nk^fuzziness * w_km * z_k * vzdialenost
+    globals.objectiveFunction = matrix.updateObjectiveFunction()
+
+
 def compute():
     print('computing:')
-    updateLikeliness()
+    updateMembershipDegree()
     # if singletons -> do magic
     updateCenters()
     # if p < pmax AND empty=False -> do history
     updateWeights()
     updateClusterWeights()
+    #compute objective function f
+    # u_nk^fuzziness * w_km * z_k * vzdialenost
+    computeObjectiveFunction()
+
+
 
 def shouldContinue():
     # difference = ABSolute value of F(t) - F(t-1)
@@ -57,8 +69,8 @@ def shouldContinue():
     # no idea how to implement it
     return True
 
-def updateLikeliness():
-    globals.likeliness = matrix.updateLikeliness()
+def updateMembershipDegree():
+    globals.membershipDegree = matrix.updateMembershipDegree()
 
 def updateCenters():
     globals.centers = matrix.updateCenters()

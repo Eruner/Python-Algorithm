@@ -5,6 +5,7 @@ numberOfItems = 0               #   N
 numberOfClusters = 3            #   K
 numberOfAttributes = 4          #   M
 objectiveFunction = None        #   F
+objectiveFunctionBefore = None        #   F
 
 # global data structures
 dataset = None                  #   N x M
