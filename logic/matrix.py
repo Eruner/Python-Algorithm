@@ -154,3 +154,4 @@ def updateObjectiveFunction() :
     # all clusters K
     # all attributes M
     globals.objectiveFunction
+    #todo spocitat v cykle hodnotu

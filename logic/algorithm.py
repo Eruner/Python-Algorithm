@@ -29,7 +29,7 @@ def loadDataSet():
 
 def complexLoop():
     print('complex loop:')
-    # secundary parameters = Tmax, Pmax, Pinit, E
+    # secondary parameters = Tmax, Pmax, Pinit, E
     # no idea what they are and what values they should be    Pinit = 0
     iterations = 0 # T
     maxIterations = 2 # Tmax
@@ -47,6 +47,7 @@ def computeObjectiveFunction():
     globals.objectiveFunctionBefore = globals.objectiveFunction
     # u_nk^fuzziness * w_km * z_k * vzdialenost
     globals.objectiveFunction = matrix.updateObjectiveFunction()
+    #todo vypocitat
 
 
 def compute():
@@ -67,6 +68,7 @@ def shouldContinue():
     # difference = ABSolute value of F(t) - F(t-1)
     # is less then epsilon e
     # no idea how to implement it
+    #todo spocitat ucelovu funkciu
     return True
 
 def updateMembershipDegree():
@@ -79,7 +81,6 @@ def updateWeights():
     globals.weights = matrix.updateWeights()
 
 def updateClusterWeights():
-    # globals.clusterWeights = 
     matrix.updateClusterWeights(globals.clusterWeights)
 
 # run the algorithm
